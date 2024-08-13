@@ -60,8 +60,7 @@ jobs:
     - name: Build and push image Aliyun
       run: |
         TOKEN=$(curl -sSL -u "$DOCKER_HUB_USER:$DOCKER_HUB_PASSWORD" https://auth.docker.io/token?service=registry.docker.io&scope=repository:library/nginx:pull | jq -r '.token')
-        echo $TOKEN
-        curl -sSL -H "Authorization: Bearer $TOKEN" https://registry.hub.docker.com/v2/repositories/library/nginx/tags | jq -r '.results[].name'
+        #echo $TOKEN
         while IFS= read -r line || [ -n "$line" ]; do
             # 忽略空行与注释
             [[ -z "$line" ]] && continue
@@ -69,5 +68,7 @@ jobs:
                 continue
             fi
         
-            echo "docker pull $line"
+            echo "docker search tag $line"
+            curl -sSL -H "Authorization: Bearer $TOKEN" https://registry.hub.docker.com/v2/repositories/$line/tags | jq -r '.results[].name'
+
         done < images.txt

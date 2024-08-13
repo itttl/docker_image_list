@@ -46,6 +46,12 @@ jobs:
         df -hT
         echo "=============================================================================="
 
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Docker Setup Buildx
+      uses: docker/setup-buildx-action@v3
+
     - name: List Docker HUB Image Tag
       run: |
         TOKEN=$(curl -sSL -u "$DOCKER_HUB_USER:$DOCKER_HUB_PASSWORD" https://auth.docker.io/token?service=registry.docker.io&scope=repository:library/nginx:pull | jq -r '.token')

@@ -1,2 +1,3 @@
 jenkins/jenkins
 library/nginx
+efrecon/s3fs

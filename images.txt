@@ -1,4 +1,5 @@
-jenkins/jenkins
-library/nginx
-efrecon/s3fs
-alpine
+#jenkins/jenkins
+#library/nginx
+#efrecon/s3fs
+#alpine
+datajuicer/data-juicer
